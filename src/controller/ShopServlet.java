@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "ShopServlet", urlPatterns = "/shop")
@@ -30,7 +31,7 @@ public class ShopServlet extends HttpServlet {
                 case "create":
                     insertShop(request, response);
                     break;
-                case "update":
+                case "edit":
                     updateShop(request, response);
                     break;
                 case "search":
@@ -41,16 +42,16 @@ public class ShopServlet extends HttpServlet {
                     break;
             }
         } catch (Exception ex) {
-            throw new ServletException(ex);
+                new Exception(ex);
         }
     }
 
     private void searchResult(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-        List<Shop> shops;
+        List<Shop> shop = new ArrayList<>();
         String country = request.getParameter("country");
         ShopDao shopDao= new ShopDao();
-        shops= shopDao.findByCountry(country);
-        request.setAttribute("shop",shops);
+        shop= shopDao.findByCountry(country);
+        request.setAttribute("shop",shop);
         RequestDispatcher dispatcher = request.getRequestDispatcher("shop/showSearch.jsp");
         dispatcher.forward(request,response);
     }
@@ -63,9 +64,10 @@ public class ShopServlet extends HttpServlet {
         String Description = request.getParameter("Description");
 
 
-        Shop book = new Shop(id, url, name, price, Description);
+        Shop shops = new Shop(id, url, name, price, Description);
         ShopDao shopDao = new ShopDao();
-        shopDao.updateShop(book);
+        shopDao.updateShop(shops);
+        request.setAttribute("shop",shops);
         RequestDispatcher dispatcher = request.getRequestDispatcher("shop/update.jsp");
         dispatcher.forward(request, response);
     }
@@ -98,12 +100,12 @@ public class ShopServlet extends HttpServlet {
                     break;
                 case "delete":
                     delete(request, response);
-                case "update":
+                case "edit":
                     showUpdate(request, response);
                 case "search":
                     searchShop(request,response);
                     break;
-                case "sortByName":
+                case "sort":
                     sortByName(request,response);
                     break;
                 default:
@@ -111,8 +113,8 @@ public class ShopServlet extends HttpServlet {
                     break;
 
             }
-        } catch (Exception ex) {
-            new Exception(ex);
+        } catch (SQLException ex) {
+            throw new ServletException(ex);
         }
     }
 
@@ -125,16 +127,17 @@ public class ShopServlet extends HttpServlet {
     }
 
     private void searchShop(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("shop/showSearch.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("shop/search.jsp");
         dispatcher.forward(request,response);
     }
 
     private void showUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         ShopDao shopDao = new ShopDao();
-        Shop Shop = (Shop) shopDao.selectShop();
+       List<Shop> Shop = shopDao.SelectShop(id);
+//        request.setAttribute("Shop",Shop);
         RequestDispatcher dispatcher = request.getRequestDispatcher("shop/update.jsp");
-        request.setAttribute("shop", Shop);
+
         dispatcher.forward(request, response);
 
     }

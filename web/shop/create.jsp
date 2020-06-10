@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"
-pageEncoding="UTF-8" %>
+         pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
@@ -26,11 +26,16 @@ pageEncoding="UTF-8" %>
                 <h2>Shop</h2>
             </caption>
             <tr>
-                <td><button><a href="http://localhost:8080/shop?action=list">Hiển Thị</a></button></td>
-                <td><button><a href="http://localhost:8080/shop?action=create">Thêm</a></button></td>
-                <td><button><a>Tìm Kiếm</a></button></td>
-                <td><button><a>Sửa</a></button></td>
-                <td><button><a>Xóa</a></button></td>
+                <td></td>
+                <td>
+                    <button><a href="http://localhost:8080/shop?action=list">Hiển Thị</a></button>
+                </td>
+                <td>
+                    <button><a href="http://localhost:8080/shop?action=search">Tìm Kiếm</a></button>
+                </td>
+                <td>
+                    <button><a href="http://localhost:8080/shop?action=sort">Sắp Xếp</a></button>
+                </td>
             </tr>
         </table>
         <table border="1" cellpadding="5">

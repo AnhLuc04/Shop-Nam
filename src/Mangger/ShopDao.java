@@ -17,7 +17,7 @@ public class ShopDao implements ShopDaoInterface {
     private static final String SELECT_FROM_SHOP = "select * from shop";
     private static final String DELETE_Shop_SQL = "delete from shop where id = ?;";
     private static final String UPDATE_Shop_SQL = "update shop set name = ?,url=?,price= ?,Description =? where id = ?;";
-    private static final String SEARCH_BY_COUNTRY =  "select * from shop where country like ?;";
+    private static final String SEARCH_BY_COUNTRY =  "select * from shop where name like ?;";
     private static final String SORT_BY_NAME =  "select * from shop order by name";
     ;
 
@@ -55,6 +55,31 @@ public class ShopDao implements ShopDaoInterface {
                 String price = rs.getString("price");
                 String Description = rs.getString("Description");
                 shops.add(new Shop(id,url, name, price, Description));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return shops;
+    }
+
+    @Override
+    public List<Shop> SelectShop(int id) {
+        //b1 :thiết lập kết nối
+        List<Shop> shops = new ArrayList<>();
+// Bước 2: Tạo câu lệnh bằng cách sử dụng đối tượng kết nối
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FROM_SHOP);) {
+            System.out.println(preparedStatement);
+            // Bước 3: Thực hiện truy vấn hoặc cập nhật truy vấn
+            ResultSet rs = preparedStatement.executeQuery();
+// Bước 4: Xử lý đối tượng resultset.
+            while (rs.next()) {
+                int ID = rs.getInt("id");
+                String url=rs.getString("url");
+                String name = rs.getString("name");
+                String price = rs.getString("price");
+                String Description = rs.getString("Description");
+                shops.add(new Shop(ID,url, name, price, Description));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

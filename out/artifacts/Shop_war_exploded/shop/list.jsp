@@ -21,10 +21,19 @@
 <div align="center">
     <table border="1" cellpadding="5">
         <tr>
-            <td><button><a href="http://localhost:8080/shop?action=create">Thêm</a></button></td>
-            <td><button><a>Tìm Kiếm</a></button></td>
+            <td>
+                <button><a href="http://localhost:8080/shop?action=list">cập nhật</a></button>
+            </td>
 
-
+            <td>
+                <button><a href="http://localhost:8080/shop?action=create">Thêm</a></button>
+            </td>
+            <td>
+                <button><a  href="http://localhost:8080/shop?action=search">Tìm Kiếm</a></button>
+            </td>
+            <td>
+                <button><a href="http://localhost:8080/shop?action=sort">Sắp Xếp</a></button>
+            </td>
         </tr>
     </table>
     <table border="1" cellpadding="5">
@@ -45,10 +54,9 @@
                 <td><c:out value="${shop.getName()}"/></td>
                 <td><c:out value="${shop.getPrice()}"/></td>
                 <td><c:out value="${shop.getDescription()}"/></td>
-                <td><a href="/shop?action=delete&id=${shop.id}">Xóa</a></td>
-                <td><button><a href="http://localhost:8080/shop?action=update">Sửa</a></button></td>
+                <td><a href="http://localhost:8080/shop?action=delete&id=${shop.id}">Xóa</a></td>
+                <td><a href="http://localhost:8080/shop?action=edit&id=${shop.id}">Edit</a></td>
             </tr>
-
         </c:forEach>
     </table>
 </div>

@@ -11,9 +11,23 @@
     <title>Title</title>
 </head>
 <body>
+<center>
+    <h1>Shop Tiamo</h1>
+    <h2>
+        <a href="/shop?action=search"></a>
+    </h2>
+</center>
+
 <fieldset>
     <legend>Search by country</legend>
     <form method="post">
+
+            <button><a href="http://localhost:8080/shop?action=list">Hiển Thị</a></button>
+
+            <button><a href="http://localhost:8080/shop?action=create">Thêm</a></button>
+
+            <button><a href="http://localhost:8080/shop?action=sort">Sắp Xếp</a></button>
+
         <input type="text" name="country">
         <input type="submit" value="Search">
     </form>

@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface ShopDaoInterface {
    public List<Shop> selectShop();
+   public List<Shop> SelectShop(int id);
    public  void insertShop(Shop shop) throws SQLException;
    public boolean updateShop(Shop shop) throws  SQLException;
    public boolean deleteShop(int id) throws SQLException;

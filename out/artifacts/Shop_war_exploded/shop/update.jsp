@@ -2,77 +2,49 @@
   Created by IntelliJ IDEA.
   User: Admin
   Date: 09/06/2020
-  Time: 9:08 AM
+  Time: 4:06 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Tiamo Shop</title>
+    <title>Edit</title>
 </head>
 <body>
 <center>
-    <h1>Tiamo Shop</h1>
-    <h2>
-        <a href="shop?action=update"></a>
-    </h2>
-
+<h1>Edit User</h1>
 </center>
-<div align="center">
+<fieldset>
+    <legend>Edit information</legend>
+
+    <c:if test="${Shop!=null}">
+        <input type="hidden" name="id" value="<c:out value='${Shop.id}'/>">
+    </c:if>
+
     <form method="post">
-        <table border="1" cellpadding="5">
-            <caption>
-                <h2>
-                 Shop
-                </h2>
-            </caption>
-            <c:if test="${shop != null}">
-                <input type="hidden" name="id" value="<c:out value='${shop.setId()}' />"/>
-            </c:if>
+        <table border="1">
             <tr>
-                <th>Url:</th>
-                <td>
-                    <input type="text" name="name" size="45"
-                           value="<c:out value='${shop.setUrl()}' />"
-                    />
-                </td>
+                <th>url:</th>
+                <td><input type="text" name="url" value="<c:out value="${Shop.url}"/>"></td>
             </tr>
             <tr>
-                <th>Name:</th>
-                <td>
-                    <input type="text" name="email" size="45"
-                           value="<c:out value='${shop.setName()}' />"
-                    />
-                </td>
+                <th>User Name</th>
+                <td><input type="text" name="name" value="<c:out value="${Shop.name}"/>"></td>
             </tr>
             <tr>
-                <th>price:</th>
-                <td>
-                    <input type="text" name="country" size="15"
-                           value="<c:out value='${shop.setPrice()}' />"
-                    />
-                </td>
+                <th>Price:</th>
+                <td><input type="text" name="price" value="<c:out value="${Shop.price}"/>"></td>
             </tr>
             <tr>
                 <th>Description:</th>
-                <td>
-                    <input type="text" name="country" size="15"
-                           value="<c:out value='${shop.setDescription()}' />"
-                    />
-                </td>
+                <td><input type="text" name="Description" value="<c:out value="${Shop.Description}"/>"></td>
             </tr>
-
-
             <tr>
-                <td colspan="2" align="center">
-                    <input type="submit" value="Save"/>
-                </td>
+                <td align="center" colspan="2"><input type="submit" value="Save" ></td>
             </tr>
         </table>
     </form>
-</div>
-
+</fieldset>
 </body>
 </html>
