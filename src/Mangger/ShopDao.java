@@ -29,9 +29,11 @@ public class ShopDao implements ShopDaoInterface {
             System.out.println("kết nối oke");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            System.out.println("kết nối ko oke");
 // ĐỂ LÀM khối bắt tự động
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            System.out.println("kết nối ko oke");
 // ĐỂ LÀM khối bắt tự động7
         }
         return connection;
@@ -129,12 +131,12 @@ public class ShopDao implements ShopDaoInterface {
     }
 
     @Override
-    public List<Shop> findByCountry(String country) throws SQLException {
+    public List<Shop> findByCountry(String Name) throws SQLException {
         List<Shop> shops = new ArrayList<>();
         try (Connection connection = getConnection();
              PreparedStatement statement = (PreparedStatement) connection.prepareStatement(SEARCH_BY_COUNTRY);
         ) {
-            statement.setString(1, "%" + country + "%");
+            statement.setString(1, "%" + Name + "%");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
