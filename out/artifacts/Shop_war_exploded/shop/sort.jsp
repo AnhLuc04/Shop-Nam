@@ -9,38 +9,29 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Sort</title>
-    <link rel="stylesheet" href="../viewSort.css" type="text/css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>TiAMO SHOP</title>
 </head>
 <body>
-<center>
-    <h1>Shop Tiamo</h1>
-    <h2>
-        <a href="/shop?action=sort"></a>
-    </h2>
-</center>
 <header class="header">
     <div class="signs">
         <ul>
-            <a href="">Cửa Hàng</a>
-            <a href="">liên hệ</a>
+            <a href="http://localhost:8080/shop?action=ShopTiamo">Cửa Hàng</a>
             <h1 class="h1">TIAMO SHOP</h1>
         </ul>
     </div>
     <div class="frames">
         <ul>
-            <a href="">TẠP CHÍ THỜI TRANG</a>
             <a href="/shop?action=sort">SALE OFF</a>
+            <a href="/shop?action=create">Bạn có đồ muốn giao bán?</a>
+            <a href="">086 2792153</a>
         </ul>
         <ul class="login">
             <form class="form-inline" action="/shop?action=search" method="post">
                 <input class="form-control mr-sm-2" type="search"  name="name" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" value="search" type="submit">Search</button>
             </form>
-            <button class="btn btn-primary" type="submit">Đăng Nhập</button>
-            <button class="btn btn-primary" type="submit">Đăng Ký</button>
+            <button class="btn btn-primary" type="submit"><a href="http://localhost:8080/shop?action=User">Đăng Nhập</a></button>
+            <button class="btn btn-primary" type="submit"><a href="http://localhost:8080/shop?action=createUser">Đăng Ký</a></button>
         </ul>
     </div>
 </header>
@@ -60,9 +51,9 @@
         <p>@Mọi người ủng hộ Shop Mk nha?@</p>
     </div>
 </footer>
-
-</body>
-</html>
+<link rel="stylesheet" href="../viewSort.css" type="text/css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -72,3 +63,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+</body>
+</html>

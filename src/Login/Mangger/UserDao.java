@@ -33,7 +33,7 @@ public class UserDao implements  Users {
 
     @Override
     public User Login(String name) {
-        String sql = "SELECT * FROM  user WHERE name = ?";
+        String sql = "SELECT username, password, id  FROM  user WHERE username = ?";
         try {
             PreparedStatement ps = getConnection().prepareStatement(sql);
             ps.setString(1, name);
@@ -41,9 +41,9 @@ public class UserDao implements  Users {
             while (rs.next()) {
                 String u = rs.getString(1);
                 String p = rs.getString(2);
-                int role = rs.getInt(3);
+                int id = rs.getInt(3);
 
-                return new  User(u, p, role);
+                return new  User(u, p,id);
             }
         } catch (SQLException e) {
             throw new RuntimeException("Lỗi thực thi lệnh SQL SELECT");

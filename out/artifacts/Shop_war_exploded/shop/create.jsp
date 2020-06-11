@@ -11,65 +11,57 @@
 <html>
 <head>
     <title>Shop Tiamo</title>
+
 </head>
 <body>
-<center>
-    <h1>Tiamo Shop</h1>
-    <h2>
-        <a href="shop?action=create"></a>
-    </h2>
-</center>
+<header class="header">
+    <div class="signs">
+        <ul>
+            <a href="http://localhost:8080/shop?action=ShopTiamo">Cửa Hàng</a>
+            <h1 class="h1">TIAMO SHOP</h1>
+        </ul>
+    </div>
+    <div class="frames">
+        <ul>
+            <a href="/shop?action=sort">SALE OFF</a>
+            <a href="/shop?action=create">Bạn có đồ muốn giao bán?</a>
+            <a href="">086 2792153</a>
+        </ul>
+        <ul class="login">
+            <form class="form-inline" action="/shop?action=search" method="post">
+                <input class="form-control mr-sm-2" type="search"  name="name" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" value="search" type="submit">Search</button>
+            </form>
+            <button class="btn btn-primary" type="submit"><a href="http://localhost:8080/shop?action=User">Đăng Nhập</a></button>
+            <button class="btn btn-primary" type="submit"><a href="http://localhost:8080/shop?action=createUser">Đăng Ký</a></button>
+        </ul>
+    </div>
+</header>
 <div align="center">
-    <form method="post">
-        <table border="1" cellpadding="5">
-            <caption>
-                <h2>Shop</h2>
-            </caption>
-            <tr>
-                <td></td>
-                <td>
-                    <button><a href="http://localhost:8080/shop?action=list">Hiển Thị</a></button>
-                </td>
-                <td>
-                    <button><a href="http://localhost:8080/shop?action=search">Tìm Kiếm</a></button>
-                </td>
-                <td>
-                    <button><a href="http://localhost:8080/shop?action=sort">Sắp Xếp</a></button>
-                </td>
-            </tr>
-        </table>
-        <table border="1" cellpadding="5">
-            <tr>
-                <th>url:</th>
-                <td>
-                    <input type="text" name="url" size="45">
-                </td>
-            </tr>
-            <tr>
-                <th>Name:</th>
-                <td>
-                    <input type="text" name="name" id="name" size="45"/>
-                </td>
-            </tr>
-            <tr>
-                <th>price:</th>
-                <td>
-                    <input type="text" name="price" id="price" size="45"/>
-                </td>
-            </tr>
-            <tr>
-                <th>Description:</th>
-                <td>
-                    <input type="text" name="Description" id="Description" size="15"/>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center">
-                    <input type="submit" value="Save" href="http://localhost:8080/shop?action=list"/>
-                </td>
-            </tr>
-        </table>
-    </form>
+        <form class="form-inline" method="post">
+            <input class="form-control mr-sm-2" type="text" placeholder="link ảnh" name="url">
+            <input class="form-control mr-sm-2" type="text" placeholder="Name" name="name">
+            <input class="form-control mr-sm-2" type="text" placeholder="Price" name="price">
+            <input class="form-control mr-sm-2" type="text" placeholder="Miêu Tả" name="Description">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="save">Kí Gửi</button>
+        </form>
 </div>
+<footer>
+    <div class="card-heading text-center">
+        <p>@Mọi người ủng hộ Shop Mk nha?@</p>
+    </div>
+</footer>
+<link rel="stylesheet" href="../viewCreate.css" type="text/css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
 </body>
 </html>

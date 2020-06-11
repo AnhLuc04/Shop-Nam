@@ -20,7 +20,6 @@ import java.util.List;
 @WebServlet(name = "ShopServlet", urlPatterns = "/shop")
 public class ShopServlet extends HttpServlet {
 
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         String test = request.getParameter("password");
@@ -29,14 +28,11 @@ public class ShopServlet extends HttpServlet {
         }
         try {
             switch (action) {
-                case"User":
-                    userShop(request,response);
+                case "User":
+                    userShop(request, response);
                     break;
                 case "createUser":
                     insertUser(request, response);
-                    break;
-                case "list":
-                    listShop(request, response);
                     break;
                 case "create":
                     insertShop(request, response);
@@ -48,7 +44,7 @@ public class ShopServlet extends HttpServlet {
                     searchResult(request, response);
                     break;
                 default:
-                    listShop(request, response);
+                    TiamoShop(request, response);
                     break;
             }
         } catch (Exception ex) {
@@ -56,20 +52,19 @@ public class ShopServlet extends HttpServlet {
         }
     }
 
-    private void insertUser(HttpServletRequest request, HttpServletResponse response)
-               throws SQLException, IOException, ServletException {
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            User newUser = new User(username,password);
-            UserDao userDAO= new UserDao();
-            userDAO.insertUser(newUser);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("Login/createUser.jsp");
-            dispatcher.forward(request, response);
+    private void insertUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        User newUser = new User(username, password);
+        UserDao userDAO = new UserDao();
+        userDAO.insertUser(newUser);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("Login/createUser.jsp");
+        dispatcher.forward(request, response);
+        response.sendRedirect("viewShop/viewShop.jsp");
     }
 
-
     private void searchResult(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-        List<Shop> shop = new ArrayList<>();
+        List<Shop> shop ;
         String name = request.getParameter("name");
         ShopDao shopDao = new ShopDao();
         shop = shopDao.findByCountry(name);
@@ -84,7 +79,6 @@ public class ShopServlet extends HttpServlet {
         String name = request.getParameter("name");
         String price = request.getParameter("price");
         String Description = request.getParameter("Description");
-
 
         Shop shops = new Shop(id, url, name, price, Description);
         ShopDao shopDao = new ShopDao();
@@ -102,35 +96,27 @@ public class ShopServlet extends HttpServlet {
         Shop newShop = new Shop(url, name, price, Description);
         ShopDao shopDao = new ShopDao();
         shopDao.insertShop(newShop);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("shop/list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("viewShop/viewShop.jsp");
         dispatcher.forward(request, response);
+        response.sendRedirect("viewShop/viewShop.jsp");
     }
+
     private void userShop(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         UserDao userDAO = new UserDao();
-
         User user = userDAO.Login(username);
-
         if (user.getPassword().equals(password)) {
-
             HttpSession session = request.getSession();
             session.setAttribute("IS_LOGGINED", true);
-            session.setAttribute("ROLE", user.getRole());
-
+            session.setAttribute("ROLE", user.getId());
             response.sendRedirect("viewShop/viewShop.jsp");
-
         } else {
-
-            // thong bao loi dang nhap
-
             request.setAttribute("message", "Đăng nhập không thành công");
             RequestDispatcher dispatcher = request.getRequestDispatcher("Login/login.jsp");
-            dispatcher.forward(request,response);
+            dispatcher.forward(request, response);
         }
-
     }
-
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -140,16 +126,13 @@ public class ShopServlet extends HttpServlet {
         try {
             switch (action) {
                 case "ShopTiamo":
-                    TiamoShop(request,response);
+                    TiamoShop(request, response);
                     break;
                 case "User":
                     ShowUserShop(request, response);
                     break;
                 case "createUser":
                     showCreateUser(request, response);
-                    break;
-                case "list":
-                    listShop(request, response);
                     break;
                 case "create":
                     newShop(request, response);
@@ -158,16 +141,12 @@ public class ShopServlet extends HttpServlet {
                     delete(request, response);
                 case "edit":
                     showUpdate(request, response);
-//                case "search":
-//                    searchShop(request, response);
-//                    break;
                 case "sort":
                     sortByName(request, response);
                     break;
                 default:
-                    listShop(request, response);
+                    TiamoShop(request, response);
                     break;
-
             }
         } catch (SQLException ex) {
             throw new ServletException(ex);
@@ -187,10 +166,9 @@ public class ShopServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-
     private void ShowUserShop(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("Login/login.jsp");
-        dispatcher.forward(request,response);
+        dispatcher.forward(request, response);
     }
 
     private void sortByName(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
@@ -210,11 +188,9 @@ public class ShopServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         ShopDao shopDao = new ShopDao();
         List<Shop> Shop = shopDao.SelectShop(id);
-//        request.setAttribute("Shop",Shop);
+        request.setAttribute("Shop", Shop);
         RequestDispatcher dispatcher = request.getRequestDispatcher("shop/update.jsp");
-
         dispatcher.forward(request, response);
-
     }
 
     private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -225,23 +201,14 @@ public class ShopServlet extends HttpServlet {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         List<Shop> listShop = shopDao.selectShop();
         request.setAttribute("listShop", listShop);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("shop/list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("viewShop/viewShop.jsp");
         dispatcher.forward(request, response);
     }
 
     private void newShop(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("shop/create.jsp");
-        dispatcher.forward(request, response);
-    }
-
-    private void listShop(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ShopDao shopDAO = new ShopDao();
-        List<Shop> listShop = shopDAO.selectShop();
-        request.setAttribute("listShop", listShop);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("shop/list.jsp");
         dispatcher.forward(request, response);
     }
 }

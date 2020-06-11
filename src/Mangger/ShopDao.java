@@ -13,7 +13,6 @@ public class ShopDao implements ShopDaoInterface {
     private String jdbcPassword = "04032001";
 
     private static final String INSERT_shop_SQL = "INSERT INTO shop" + "  (url,name,price,Description) VALUES " + " (?, ?, ?,?);";
-    private static final String SELECT_Shop_BY_ID = "select id,name,email,country from users where id =?";
     private static final String SELECT_FROM_SHOP = "select * from shop";
     private static final String DELETE_Shop_SQL = "delete from shop where id = ?;";
     private static final String UPDATE_Shop_SQL = "update shop set name = ?,url=?,price= ?,Description =? where id = ?;";
@@ -30,26 +29,20 @@ public class ShopDao implements ShopDaoInterface {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             System.out.println("kết nối ko oke");
-// ĐỂ LÀM khối bắt tự động
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             System.out.println("kết nối ko oke");
-// ĐỂ LÀM khối bắt tự động7
         }
         return connection;
     }
 
     @Override
     public List<Shop> selectShop() {
-        //b1 :thiết lập kết nối
         List<Shop> shops = new ArrayList<>();
-// Bước 2: Tạo câu lệnh bằng cách sử dụng đối tượng kết nối
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FROM_SHOP);) {
             System.out.println(preparedStatement);
-            // Bước 3: Thực hiện truy vấn hoặc cập nhật truy vấn
             ResultSet rs = preparedStatement.executeQuery();
-// Bước 4: Xử lý đối tượng resultset.
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String url=rs.getString("url");
@@ -66,15 +59,11 @@ public class ShopDao implements ShopDaoInterface {
 
     @Override
     public List<Shop> SelectShop(int id) {
-        //b1 :thiết lập kết nối
         List<Shop> shops = new ArrayList<>();
-// Bước 2: Tạo câu lệnh bằng cách sử dụng đối tượng kết nối
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FROM_SHOP);) {
             System.out.println(preparedStatement);
-            // Bước 3: Thực hiện truy vấn hoặc cập nhật truy vấn
             ResultSet rs = preparedStatement.executeQuery();
-// Bước 4: Xử lý đối tượng resultset.
             while (rs.next()) {
                 int ID = rs.getInt("id");
                 String url=rs.getString("url");
@@ -92,9 +81,7 @@ public class ShopDao implements ShopDaoInterface {
     @Override
     public void insertShop(Shop shop) throws SQLException {
         System.out.println(INSERT_shop_SQL);
-        // câu lệnh try-with-resource sẽ tự động đóng kết nối.
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(INSERT_shop_SQL)) {
-
             preparedStatement.setString(1,shop.getUrl());
             preparedStatement.setString(2, shop.getName());
             preparedStatement.setString(3,shop.getPrice());
@@ -132,7 +119,7 @@ public class ShopDao implements ShopDaoInterface {
 
     @Override
     public List<Shop> findByCountry(String Name) throws SQLException {
-        List<Shop> shops = new ArrayList<>();
+        List<Shop> shop = new ArrayList<>();
         try (Connection connection = getConnection();
              PreparedStatement statement = (PreparedStatement) connection.prepareStatement(SEARCH_BY_COUNTRY);
         ) {
@@ -144,10 +131,10 @@ public class ShopDao implements ShopDaoInterface {
                 String name = resultSet.getString("name");
                 String price = resultSet.getString("price");
                 String Description = resultSet.getString("Description");
-                shops.add(new Shop(id,url, name,price , Description));
+                shop.add(new Shop(id,url, name,price , Description));
             }
         }
-        return shops;
+        return shop;
     }
 
     @Override
@@ -167,11 +154,5 @@ public class ShopDao implements ShopDaoInterface {
             }
         }
         return shops;
-
-    }
-
-    public static void main(String[] args) {
-        ShopDao shopDao = new ShopDao();
-        shopDao.getConnection();
     }
 }

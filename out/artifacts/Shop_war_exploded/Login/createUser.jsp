@@ -21,7 +21,7 @@
         <tr>
             <th>User Name:</th>
             <td>
-                <input type="text" name="name" id="name" size="45"/>
+                <input type="text" name="username" id="username" size="45"/>
             </td>
         </tr>
         <tr>
