@@ -1,16 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: Admin
-  Date: 05/06/2020
-  Time: 8:55 AM
+  Date: 09/06/2020
+  Time: 4:06 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java"
-         pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Shop Tiamo</title>
+    <title>TiAMO SHOP</title>
 
 </head>
 <body>
@@ -37,21 +36,22 @@
         </ul>
     </div>
 </header>
-<div align="center">
-        <form class="form-inline" method="post">
-            <input class="form-control mr-sm-2" type="text" placeholder="link ảnh" name="url">
-            <input class="form-control mr-sm-2" type="text" placeholder="Name" name="name">
-            <input class="form-control mr-sm-2" type="text" placeholder="Price" name="price">
-            <input class="form-control mr-sm-2" type="text" placeholder="Miêu Tả" name="Description">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="save">Kí Gửi</button>
-        </form>
-</div>
+<c:if test="${listShop!=null}">
+    <input type="hidden" name="id" value="<c:out value='${listShop.id}'/>">
+</c:if>
+<form class="form-inline" method="post">
+    <input class="form-control mr-sm-2" type="text" placeholder="link ảnh" name="url" value="<c:out value="${listShop.url}"/>">
+    <input class="form-control mr-sm-2" type="text" placeholder="Name" name="name" value="<c:out value="${listShop.name}"/>">
+    <input class="form-control mr-sm-2" type="text" placeholder="Price" name="price" value="<c:out value="${listShop.price}"/>">
+    <input class="form-control mr-sm-2" type="text" placeholder="Miêu Tả" name="Description" value="<c:out value="${listShop.Description}"/>">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="save" href="/shop?action=ShopTiamo">Kí Gửi</button>
+</form>
 <footer>
     <div class="card-heading text-center">
         <p>@Mọi người ủng hộ Shop Mk nha?@</p>
     </div>
 </footer>
-<link rel="stylesheet" href="../viewCreate.css" type="text/css">
+<link rel="stylesheet" href="../viewUpdate.css" type="text/css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
